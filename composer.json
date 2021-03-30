@@ -1,0 +1,15 @@
+{
+    "name": "wskz/login",
+    "type": "project",
+    "require": {},
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "Wskz\\Lib\\": "src/lib",
+            "Wskz\\Controllers\\": "src/controllers",
+            "Wskz\\Models\\": "src/models",
+            "Wskz\\Repositories\\": "src/repositories",
+            "Wskz\\Views\\": "src/views"
+        }
+    }
+}
