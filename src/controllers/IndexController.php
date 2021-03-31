@@ -1,10 +1,13 @@
 <?php
 
 namespace Wskz\Controllers;
+
+use Wskz\Views\IndexView;
+use Wskz\Views\IndexEmptyView;
 use Wskz\Repositories\UserRepository;
 
 
-class IndexController implements IController
+class IndexController
 {
     private UserRepository $user_repo;
 
@@ -20,13 +23,26 @@ class IndexController implements IController
     {
         if (isset($_SESSION['uid'])) {
             $user = $this->user_repo->getById($_SESSION['uid']);
-            echo '<pre>'.var_export($user, true).'</pre>';
-        }
-        echo '<pre>'.var_export($_SESSION, true).'</pre>';
-    }
 
-    public function post(): void
-    {
-        // TODO: Implement post() method.
+            if (!$user) {
+                die('Unauthorized');
+            }
+
+            $data = [
+                'messages' => $_SESSION['messages'] ?? null,
+                'login' => $user->getLogin(),
+                'first_name' => $user->getFirstName(),
+                'last_name' => $user->getLastName(),
+                'gender' => $user->getGender(),
+                'created_at' => $user->getCreatedAt(),
+            ];
+            (new IndexView())->render($data);
+        } else {
+            $data = [
+                'messages' => $_SESSION['messages'] ?? null,
+            ];
+            (new IndexEmptyView())->render($data);
+        }
+        unset($_SESSION['messages']);
     }
 }

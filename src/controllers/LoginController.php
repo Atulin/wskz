@@ -4,7 +4,7 @@ use Wskz\Views\LoginView;
 use Wskz\Repositories\UserRepository;
 
 
-class LoginController implements IController
+class LoginController
 {
     private UserRepository $user_repo;
 

@@ -3,6 +3,8 @@ use Wskz\Lib\Dotenv;
 use Wskz\Controllers\IController;
 use Wskz\Controllers\LoginController;
 use Wskz\Controllers\IndexController;
+use Wskz\Controllers\LogoutController;
+use Wskz\Controllers\ShoutsController;
 use Wskz\Controllers\RegisterController;
 
 session_start();
@@ -19,7 +21,6 @@ if (isset($_ENV['ENV']) && $_ENV['ENV'] === 'DEV') {
 
 $url = parse_url($_SERVER['REQUEST_URI']);
 
-/** @var IController $controller */
 $controller = null;
 switch ($url['path']) {
     case '/':
@@ -31,17 +32,13 @@ switch ($url['path']) {
     case '/register':
         $controller = new RegisterController();
         break;
+    case '/logout':
+        $controller = new LogoutController();
+        break;
+    case '/shouts':
+        $controller = new ShoutsController();
+        break;
     default:
         die('404 Not Found');
 }
-
-switch ($_SERVER['REQUEST_METHOD']) {
-    case 'POST':
-        $controller->post();
-        break;
-    case 'GET':
-        $controller->get();
-        break;
-    default:
-        die('404 Not Fond');
-}
+$controller->{strtolower($_SERVER['REQUEST_METHOD'])}();

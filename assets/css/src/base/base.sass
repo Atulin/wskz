@@ -1,0 +1,27 @@
+*, *:before, *:after
+  box-sizing: border-box
+  padding: 0
+  margin: 0
+
+  @media (prefers-reduced-motion)
+    transition: none
+    animation-duration: 0s
+
+html, body
+  width: 100%
+  min-height: 100vh
+  background-color: var(--bg-1)
+
+body
+  display: flex
+  flex-direction: column
+  align-items: center
+  font-family: 'Nunito', sans-serif
+
+  main
+    width: min(90%, 500px)
+    margin: 1rem
+    padding: 1rem
+    border-radius: 1rem
+    box-shadow: 0 0 5px 0 var(--shadow)
+    background-color: var(--bg)

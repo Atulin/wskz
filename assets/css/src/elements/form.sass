@@ -1,0 +1,29 @@
+form
+  display: flex
+  flex-direction: column
+
+  label
+    display: none
+
+  input, select
+    padding: .5rem
+    font-size: 1.1rem
+    &:not(:first-child)
+      margin-top: .5rem
+
+    &:not(:placeholder-shown):invalid
+      border: 1px solid red
+
+    &[type=submit]
+      margin-top: .5rem
+      width: 100%
+      padding: .5rem
+      background: var(--acc)
+      border-radius: .5rem
+      border: 1px solid var(--fg-50)
+      color: var(--bg)
+      cursor: pointer
+
+      &:hover
+        text-decoration: underline
+        border-color: var(--fg)

@@ -5,7 +5,7 @@ use Wskz\Views\RegisterView;
 use Wskz\Repositories\UserRepository;
 
 
-class RegisterController implements IController
+class RegisterController
 {
     private UserRepository $user_repo;
 
@@ -45,6 +45,10 @@ class RegisterController implements IController
 
         if ($_POST['password'] !== $_POST['password_2']) {
             $_SESSION['errors'][] = 'Passwords do not match.';
+        }
+
+        if (!isset($_POST['gender']) || empty($_POST['gender'])) {
+            $_SESSION['errors'][] = 'You must select a gender';
         }
 
         if (count($_SESSION['errors']) > 0) {
